@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 
 const router = express.Router();
 
-router.get('/register', UserController.showRegisterForm);
+// router.get('/register', UserController.showRegisterForm);
 router.post('/register', validateRegistration, (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -14,7 +14,7 @@ router.post('/register', validateRegistration, (req, res, next) => {
   next();
 }, UserController.register);
 
-router.get('/login', UserController.showLoginForm);
+// router.get('/login', UserController.showLoginForm);
 router.post('/login', validateLogin, (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

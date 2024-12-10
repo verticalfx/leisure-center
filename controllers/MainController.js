@@ -1,8 +1,4 @@
 class MainController {
-    constructor() {
-        this.name = 'MainController';
-    }
-
     getIndex(req, res) {
         res.render('index', { title: 'Home' });
     }
@@ -13,4 +9,4 @@ class MainController {
 
 }
 
-exports.MainController = new MainController();
+module.exports = new MainController();

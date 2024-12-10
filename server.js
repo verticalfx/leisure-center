@@ -2,17 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const ejs = require('ejs');
 const sessions = require('express-session');
-const expressSaniziter = require('express-sanitizer');
-
-const mysql = require('mysql2');
+const expressSanitizer = require('express-sanitizer');
+const mainRoutes = require('./routes/main');
+const userRoutes = require('./routes/users')
+const connection = require('./config/db');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
-
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static(__dirname + '/public'));
 
 app.use(sessions({
@@ -22,19 +21,13 @@ app.use(sessions({
   cookie: { maxAge: 60000 }
 }));
 
-app.use(expressSaniziter());
+app.use(expressSanitizer());
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+// Route handling
+app.use('/', mainRoutes);
+app.use('/user', userRoutes);
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+    console.log(`Website name: ${process.env.WEBSITE_NAME}`);
 });
-
-connection.connect(function (err) {
-  if (err) throw err;
-  console.log('Connected!');
-});
-
-global.db = connection
-

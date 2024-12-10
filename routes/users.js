@@ -23,6 +23,6 @@ router.post('/login', validateLogin, (req, res, next) => {
   next();
 }, UserController.login);
 
-router.get('/logout', UserController.logout);
+// router.get('/logout', UserController.logout);
 
 module.exports = router;

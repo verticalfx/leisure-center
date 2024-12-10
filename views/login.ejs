@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-  <nav class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex-shrink-0 flex items-center">
-          <span class="text-2xl font-bold text-blue-600">Leisure Center</span>
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="/">
+                        <span class="text-2xl font-bold text-blue-600">Leisure Center</span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
+    </nav>
+
+    <div class="flex justify-center items-center min-h-screen">
+        <div class="bg-white shadow-lg rounded p-8 w-full max-w-md">
+
+            <h1 class="text-2xl font-bold mb-4 text-center"><%= title %></h1>
+
+            <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+            <div class="mb-4 bg-red-100 text-red-700 p-2 rounded">
+                <ul>
+                    <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+            <% } %>
+
+            <% if (typeof error !== 'undefined') { %>
+            <div class="mb-4 bg-red-100 text-red-700 p-2 rounded">
+                <%= error %>
+            </div>
+            <% } %>
+
+            <form action="/user/login" method="POST" class="space-y-4">
+                <input type="email" name="email" placeholder="Email" class="w-full px-3 py-2 border rounded" required>
+                <input type="password" name="password" placeholder="Password" class="w-full px-3 py-2 border rounded"
+                    required>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-medium">Login</button>
+            </form>
+
+            <p class="mt-4 text-center text-sm">
+                Don't have an account?
+                <a href="/register" class="text-blue-600 hover:underline">Register here</a>
+            </p>
+        </div>
     </div>
-  </nav>
-
-  <div class="flex justify-center items-center min-h-screen">
-    <div class="bg-white shadow-lg rounded p-8 w-full max-w-md">
-      <h1 class="text-2xl font-bold mb-4 text-center"><%= title %></h1>
-      
-      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
-        <div class="mb-4 bg-red-100 text-red-700 p-2 rounded">
-          <ul>
-          <% errors.forEach(error => { %>
-            <li><%= error.msg %></li>
-          <% }) %>
-          </ul>
-        </div>
-      <% } %>
-
-      <% if (typeof error !== 'undefined') { %>
-        <div class="mb-4 bg-red-100 text-red-700 p-2 rounded">
-          <%= error %>
-        </div>
-      <% } %>
-
-      <form action="/user/login" method="POST" class="space-y-4">
-        <input type="email" name="email" placeholder="Email" class="w-full px-3 py-2 border rounded" required>
-        <input type="password" name="password" placeholder="Password" class="w-full px-3 py-2 border rounded" required>
-        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-medium">Login</button>
-      </form>
-
-      <p class="mt-4 text-center text-sm">
-        Don't have an account? 
-        <a href="/register" class="text-blue-600 hover:underline">Register here</a>
-      </p>
-    </div>
-  </div>
 </body>
+
 </html>

@@ -9,5 +9,6 @@ router.get('/', MainController.getIndex);
 router.get('/about', MainController.getAbout);
 router.get('/register', UserController.showRegisterForm);
 router.get('/login', UserController.showLoginForm);
+router.get('/logout', UserController.logout);
 
 module.exports = router  

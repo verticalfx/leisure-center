@@ -7,11 +7,9 @@ DROP TABLE IF EXISTS roles;
 
 DROP DATABASE IF EXISTS leisure_center;
 
--- create database
 CREATE DATABASE leisure_center;
 USE leisure_center;
 
--- Tables
 CREATE TABLE roles (
     role_id INT NOT NULL AUTO_INCREMENT,
     role_name VARCHAR(255) NOT NULL,
@@ -49,7 +47,9 @@ CREATE TABLE classes (
     schedule DATE NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
-    FOREIGN KEY (facility_id) REFERENCES facilities(facility_id)
+    instructor_id INT NOT NULL,
+    FOREIGN KEY (facility_id) REFERENCES facilities(facility_id),
+    FOREIGN KEY (instructor_id) REFERENCES users(id)
 );
 
 CREATE TABLE user_classes (
@@ -76,26 +76,21 @@ CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'adminpassword';
 GRANT ALL PRIVILEGES ON leisure_center.* TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
 
--- ======================================
--- VIEWS
--- ======================================
-
--- View 1: Users with their roles
--- Provides an easy way for the model layer to fetch user data along with their role name.
+-- Views
 CREATE VIEW user_with_roles AS
 SELECT u.id AS user_id, u.first_name, u.last_name, u.email, r.role_name, u.date_of_birth, u.phone_number, u.registration_date
 FROM users u
 JOIN roles r ON u.role_id = r.role_id;
 
--- View 2: Class schedules with facility information
--- Consolidate classes and their facility data for easy display.
+-- For the schedule, include instructor name and compute duration in the application layer:
 CREATE VIEW class_schedules AS
-SELECT c.class_id, c.name AS class_name, f.name AS facility_name, c.schedule, c.start_time, c.end_time
+SELECT c.class_id, c.name AS class_name, f.name AS facility_name, c.schedule, c.start_time, c.end_time,
+       CONCAT(u.first_name, ' ', u.last_name) AS instructor_name
 FROM classes c
-JOIN facilities f ON c.facility_id = f.facility_id;
+JOIN facilities f ON c.facility_id = f.facility_id
+JOIN users u ON c.instructor_id = u.id;
 
--- View 3: Class reviews
--- Provides a joined view of reviews, classes, and users, good for displaying testimonials.
+-- Reviews view remains the same:
 CREATE VIEW class_reviews AS
 SELECT rev.review_id, c.name AS class_name, CONCAT(u.first_name, ' ', u.last_name) AS reviewer,
        rev.rating, rev.comment, rev.review_date
@@ -103,51 +98,16 @@ FROM reviews rev
 JOIN classes c ON rev.class_id = c.class_id
 JOIN users u ON rev.user_id = u.id;
 
-
--- ======================================
--- STORED PROCEDURES
--- ======================================
-
+-- Procedures as before (optional)
 DELIMITER //
-
--- Procedure 1: Get classes by a specific date
--- Useful for the model to quickly fetch today's or any specific day's schedule.
 CREATE PROCEDURE get_classes_by_date(IN class_date DATE)
 BEGIN
-    SELECT c.class_id, c.name AS class_name, f.name AS facility_name, c.schedule, c.start_time, c.end_time
+    SELECT c.class_id, c.name AS class_name, f.name AS facility_name, c.schedule, c.start_time, c.end_time,
+           CONCAT(u.first_name, ' ', u.last_name) AS instructor_name
     FROM classes c
     JOIN facilities f ON c.facility_id = f.facility_id
+    JOIN users u ON c.instructor_id = u.id
     WHERE c.schedule = class_date
     ORDER BY c.start_time;
 END//
-
--- Procedure 2: Get reviews for a specific class
--- Handy for the model to fetch all testimonials for a given class.
-CREATE PROCEDURE get_reviews_for_class(IN class_id_input INT)
-BEGIN
-    SELECT rev.review_id, c.name AS class_name, CONCAT(u.first_name, ' ', u.last_name) AS reviewer, rev.rating, rev.comment, rev.review_date
-    FROM reviews rev
-    JOIN classes c ON rev.class_id = c.class_id
-    JOIN users u ON rev.user_id = u.id
-    WHERE c.class_id = class_id_input;
-END//
-
--- Procedure 3: Add a new review
--- Allows the application to add a review with a single call.
-CREATE PROCEDURE add_review(IN p_user_id INT, IN p_class_id INT, IN p_rating INT, IN p_comment TEXT)
-BEGIN
-    INSERT INTO reviews (user_id, class_id, rating, comment)
-    VALUES (p_user_id, p_class_id, p_rating, p_comment);
-END//
-
--- Procedure 4: Get user details along with their role
--- Another quick fetch for user data, possibly after login.
-CREATE PROCEDURE get_user_details(IN p_user_id INT)
-BEGIN
-    SELECT u.id, u.first_name, u.last_name, u.email, u.phone_number, u.registration_date, r.role_name
-    FROM users u
-    JOIN roles r ON u.role_id = r.role_id
-    WHERE u.id = p_user_id;
-END//
-
 DELIMITER ;

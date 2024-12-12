@@ -66,7 +66,7 @@ class UserController {
 
       // Store token in cookies
       res.cookie('token', token, { httpOnly: true, secure: false, maxAge: 3600000 });
-      res.render('index', { title: 'Home' });
+      res.redirect('')
     } catch (error) {
       console.error(error);
       res.status(500).render('login', { title: 'Login', errors: [{ msg: 'Error logging in. Please try again.' }] });

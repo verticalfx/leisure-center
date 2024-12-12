@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS user_classes;
-DROP TABLE IF EXISTS reviews;
+-- DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS facilities;
 DROP TABLE IF EXISTS users;
@@ -61,16 +61,16 @@ CREATE TABLE user_classes (
     FOREIGN KEY (class_id) REFERENCES classes(class_id)
 );
 
-CREATE TABLE reviews (
-    review_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    class_id INT NOT NULL,
-    rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
-    comment TEXT,
-    review_date DATE NOT NULL DEFAULT CURRENT_DATE,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (class_id) REFERENCES classes(class_id)
-);
+-- CREATE TABLE reviews (
+--     review_id INT AUTO_INCREMENT PRIMARY KEY,
+--     user_id INT NOT NULL,
+--     class_id INT NOT NULL,
+--     rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+--     comment TEXT,
+--     review_date DATE NOT NULL DEFAULT CURRENT_DATE,
+--     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY (class_id) REFERENCES classes(class_id)
+-- );
 
 
     CREATE VIEW user_with_roles AS
@@ -85,12 +85,12 @@ CREATE TABLE reviews (
     JOIN facilities f ON c.facility_id = f.facility_id
     JOIN users u ON c.instructor_id = u.id;
 
-    CREATE VIEW class_reviews AS
-    SELECT rev.review_id, c.name AS class_name, CONCAT(u.first_name, ' ', u.last_name) AS reviewer,
-        rev.rating, rev.comment, rev.review_date
-    FROM reviews rev
-    JOIN classes c ON rev.class_id = c.class_id
-    JOIN users u ON rev.user_id = u.id;
+    -- CREATE VIEW class_reviews AS
+    -- SELECT rev.review_id, c.name AS class_name, CONCAT(u.first_name, ' ', u.last_name) AS reviewer,
+    --     rev.rating, rev.comment, rev.review_date
+    -- FROM reviews rev
+    -- JOIN classes c ON rev.class_id = c.class_id
+    -- JOIN users u ON rev.user_id = u.id;
 
     DELIMITER //
     CREATE PROCEDURE get_classes_by_date(IN class_date DATE)

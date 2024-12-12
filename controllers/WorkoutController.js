@@ -83,7 +83,7 @@ class WorkoutController {
             });
         } catch (err) {
             console.error('Error fetching exercise details:', err);
-            res.redirect('/workouts');
+            res.redirect('workouts');
         }
     }
 }

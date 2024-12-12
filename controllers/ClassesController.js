@@ -32,7 +32,7 @@ module.exports = {
         end_time,
         instructor_id,
       });
-      res.redirect('/classes');
+      res.redirect('classes');
     } catch (error) {
       console.error('Error creating class:', error);
       res.status(500).send('Internal server error');

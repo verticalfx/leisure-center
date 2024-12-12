@@ -5,7 +5,7 @@ const WorkoutController = require('../controllers/WorkoutController');
 const validateId = (req, res, next) => {
     const { id } = req.params;
     if (!id || isNaN(id)) {
-        return res.redirect('/workouts');
+        return res.redirect('workouts');
     }
     next();
 };

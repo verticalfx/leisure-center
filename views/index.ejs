@@ -46,7 +46,7 @@
                             </span>
                         </div>
                     </div>
-                    <a href="/user/logout"
+                    <a href="user/logout"
                         class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 font-medium">
                         Logout
                     </a>
@@ -327,8 +327,8 @@
             } catch (error) {
                 console.error('Error loading user data:', error);
                 profileSection.innerHTML = `
-            <a href="/login" class="text-gray-700 hover:text-blue-600 font-medium">Login</a>
-            <a href="/register" class="text-blue-600 font-medium">Sign Up</a>
+            <a href="login" class="text-gray-700 hover:text-blue-600 font-medium">Login</a>
+            <a href="register" class="text-blue-600 font-medium">Sign Up</a>
         `;
             }
 

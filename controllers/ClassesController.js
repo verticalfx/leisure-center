@@ -5,6 +5,11 @@ const usersModel = require('../models/User');
 module.exports = {
   async renderClassesPage(req, res) {
     try {
+
+      if (!req.isAuthenticated) {
+        console.warn('[AUTH] Unauthorized access attempt to renderClassesPage');
+        return res.redirect('/login');
+      }
       const classes = await classesModel.getAllClassesWithBookings();
       const facilities = await facilitiesModel.getAllFacilities();
       const instructors = await usersModel.getAllInstructors();

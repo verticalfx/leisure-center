@@ -1,76 +1,77 @@
-    DROP TABLE IF EXISTS user_classes;
-    DROP TABLE IF EXISTS reviews;
-    DROP TABLE IF EXISTS classes;
-    DROP TABLE IF EXISTS facilities;
-    DROP TABLE IF EXISTS users;
-    DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS user_classes;
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS classes;
+DROP TABLE IF EXISTS facilities;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS roles;
 
-    DROP DATABASE IF EXISTS leisure_center;
+DROP DATABASE IF EXISTS leisure_center;
 
-    CREATE DATABASE leisure_center;
-    USE leisure_center;
+CREATE DATABASE leisure_center;
+USE leisure_center;
 
-    CREATE TABLE roles (
-        role_id INT NOT NULL AUTO_INCREMENT,
-        role_name VARCHAR(255) NOT NULL,
-        PRIMARY KEY (role_id)
-    );
+CREATE TABLE roles (
+    role_id INT NOT NULL AUTO_INCREMENT,
+    role_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (role_id)
+);
 
-    CREATE TABLE users (
-        id INT NOT NULL AUTO_INCREMENT,
-        first_name VARCHAR(255) NOT NULL,
-        last_name VARCHAR(255) NOT NULL,
-        date_of_birth DATE NOT NULL,
-        email VARCHAR(255) NOT NULL UNIQUE,
-        phone_number VARCHAR(255) NOT NULL,
-        registration_date DATE NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        role_id INT NOT NULL DEFAULT 1,
-        PRIMARY KEY (id),
-        FOREIGN KEY (role_id) REFERENCES roles(role_id)
-    );
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone_number VARCHAR(255) NOT NULL,
+    registration_date DATE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role_id INT NOT NULL DEFAULT 1,
+    PRIMARY KEY (id),
+    FOREIGN KEY (role_id) REFERENCES roles(role_id)
+);
 
-    INSERT INTO roles (role_name) VALUES ('Member'), ('Employee');
+INSERT INTO roles (role_name) VALUES ('Member'), ('Employee');
 
-    CREATE TABLE facilities (
-        facility_id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
-        description TEXT,
-        open_time TIME NOT NULL,
-        close_time TIME NOT NULL
-    );
+CREATE TABLE facilities (
+    facility_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    open_time TIME NOT NULL,
+    close_time TIME NOT NULL
+);
 
-    CREATE TABLE classes (
-        class_id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
-        facility_id INT NOT NULL,
-        schedule DATE NOT NULL,
-        start_time TIME NOT NULL,
-        end_time TIME NOT NULL,
-        instructor_id INT NOT NULL,
-        FOREIGN KEY (facility_id) REFERENCES facilities(facility_id),
-        FOREIGN KEY (instructor_id) REFERENCES users(id)
-    );
+CREATE TABLE classes (
+    class_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    facility_id INT NOT NULL,
+    schedule DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    instructor_id INT NOT NULL,
+    FOREIGN KEY (facility_id) REFERENCES facilities(facility_id),
+    FOREIGN KEY (instructor_id) REFERENCES users(id)
+);
 
-    CREATE TABLE user_classes (
-        user_id INT NOT NULL,
-        class_id INT NOT NULL,
-        registration_date DATE NOT NULL,
-        PRIMARY KEY (user_id, class_id),
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (class_id) REFERENCES classes(class_id)
-    );
+CREATE TABLE user_classes (
+    user_id INT NOT NULL,
+    class_id INT NOT NULL,
+    registration_date DATE NOT NULL,
+    PRIMARY KEY (user_id, class_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (class_id) REFERENCES classes(class_id)
+);
 
-    CREATE TABLE reviews (
-        review_id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        class_id INT NOT NULL,
-        rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
-        comment TEXT,
-        review_date DATE NOT NULL DEFAULT (CURRENT_DATE),
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (class_id) REFERENCES classes(class_id)
-    );
+CREATE TABLE reviews (
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    class_id INT NOT NULL,
+    rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    comment TEXT,
+    review_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (class_id) REFERENCES classes(class_id)
+);
+
 
     CREATE VIEW user_with_roles AS
     SELECT u.id AS user_id, u.first_name, u.last_name, u.email, r.role_name, u.date_of_birth, u.phone_number, u.registration_date

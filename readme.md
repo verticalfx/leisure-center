@@ -9,6 +9,8 @@ The **Leisure Center** application is a web-based platform designed to manage an
 - **Class Scheduling and Registration**
 - **Search and Filter Functionality**
 - **Admin Panel for User and Facility Management**
+- **Nutrition Search**
+- **Workout Search**
 
 ## Technologies
 - **Frontend:** EJS, HTML, CSS, JavaScript

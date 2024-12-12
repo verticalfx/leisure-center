@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Search Classes</h1>
+  <form action="/search/results" method="GET">
+    <input type="text" name="q" placeholder="Search by name or instructor" value="<%= query || '' %>" class="border p-2">
+    <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded">Search</button>
+  </form>
+  <hr>
+  <% if (results.length > 0) { %>
+    <ul>
+      <% results.forEach(r => { %>
+        <li><%= r.class_name %> - <%= r.instructor_name %></li>
+      <% }) %>
+    </ul>
+  <% } else if (typeof query !== 'undefined') { %>
+    <p>No results found for "<%= query %>"</p>
+  <% } %>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="text-2xl font-bold text-blue-600">Leisure Center</a>
+        <div class="flex items-center space-x-4">
+          <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Section -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Available Classes</h1>
+
+    <!-- Table of Classes -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <th class="px-4 py-2">Class Name</th>
+            <th class="px-4 py-2">Instructor</th>
+            <th class="px-4 py-2">Schedule</th>
+            <th class="px-4 py-2">Time</th>
+            <th class="px-4 py-2">Facility</th>
+            <th class="px-4 py-2">Booked Users</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (classes.length > 0) { %>
+            <% classes.forEach(cls => { %>
+              <tr class="border-t hover:bg-gray-50">
+                <td class="px-4 py-2"><%= cls.class_name %></td>
+                <td class="px-4 py-2"><%= cls.instructor_name %></td>
+                <td class="px-4 py-2"><%= cls.schedule.toLocaleDateString() %></td>
+                <td class="px-4 py-2"><%= cls.start_time %> - <%= cls.end_time %></td>
+                <td class="px-4 py-2"><%= cls.facility_name %></td>
+                <td class="px-4 py-2">
+                  <% if (cls.booked_users) { %>
+                    <%= cls.booked_users %>
+                  <% } else { %>
+                    <span class="text-gray-500">No bookings</span>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          <% } else { %>
+            <tr>
+              <td colspan="6" class="text-center py-4 text-gray-500">No classes available</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Create Class Section -->
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Create a New Class</h2>
+      <form action="/api/classes/create" method="POST" class="bg-white p-6 rounded-lg shadow-md space-y-4">
+        <div>
+          <label for="name" class="block text-gray-700 font-medium">Class Name</label>
+          <input type="text" id="name" name="name" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+        <div>
+          <label for="facility_id" class="block text-gray-700 font-medium">Facility</label>
+          <select id="facility_id" name="facility_id" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <% facilities.forEach(facility => { %>
+              <option value="<%= facility.facility_id %>"><%= facility.name %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div>
+          <label for="schedule" class="block text-gray-700 font-medium">Schedule (Date)</label>
+          <input type="date" id="schedule" name="schedule" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="start_time" class="block text-gray-700 font-medium">Start Time</label>
+            <input type="time" id="start_time" name="start_time" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+          </div>
+          <div>
+            <label for="end_time" class="block text-gray-700 font-medium">End Time</label>
+            <input type="time" id="end_time" name="end_time" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+          </div>
+        </div>
+        <div>
+          <label for="instructor_id" class="block text-gray-700 font-medium">Instructor</label>
+          <select id="instructor_id" name="instructor_id" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <% instructors.forEach(instructor => { %>
+              <option value="<%= instructor.id %>"><%= instructor.first_name %> <%= instructor.last_name %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium">
+            Create Class
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+</body>
+
+</html>

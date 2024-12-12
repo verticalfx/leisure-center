@@ -15,19 +15,41 @@
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-600"></div>
     </div>
 
-    <!-- Navigation -->
     <nav class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
+                <!-- Logo Section -->
                 <div class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-bold text-blue-600">Leisure Center</span>
+                    <a href="/" class="text-2xl font-bold text-blue-600">Leisure Center</a>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Classes</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Memberships</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Schedule</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+
+                <!-- Links Section -->
+                <div id="nav-links" class="hidden md:flex space-x-8 items-center">
+                    <a href="/classes" class="text-gray-700 hover:text-blue-600 font-medium">Classes</a>
+                    <a href="/workouts" class="text-gray-700 hover:text-blue-600 font-medium">Workouts</a>
+                    <a href="/nutrition" class="text-gray-700 hover:text-blue-600 font-medium">Nutrition</a>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile-section" class="flex items-center space-x-4">
+                    <div class="flex items-center bg-gray-100 p-3 rounded-lg shadow-md">
+                        <img src="/images/sample-profile.jpg" alt="Profile Picture"
+                            class="w-8 h-8 rounded-full object-cover mr-3" />
+                        <div>
+                            <span class="block text-gray-800 font-semibold">
+                                <!-- Placeholder name; replace with user.firstName -->
+                                User
+                            </span>
+                            <span class="block text-gray-500 text-sm">
+                                <!-- Placeholder email; replace with user.email -->
+                                user@example.com
+                            </span>
+                        </div>
+                    </div>
+                    <a href="/user/logout"
+                        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 font-medium">
+                        Logout
+                    </a>
                 </div>
             </div>
         </div>
@@ -40,10 +62,36 @@
                 <h1 class="text-5xl md:text-6xl font-extrabold mb-4">Find Your Balance</h1>
                 <p class="text-xl mb-8">A holistic approach to fitness and well-being. Join us for a journey of health,
                     happiness, and harmony.</p>
-                <a href="#"
-                    class="inline-block bg-white text-blue-600 font-semibold py-2 px-6 rounded-full hover:bg-gray-100">Get
+                <a class="inline-block bg-white text-blue-600 font-semibold py-2 px-6 rounded-full hover:bg-gray-100"
+                    href="/register">Get
                     Started</a>
             </div>
+
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <h2 class="text-2xl font-bold mb-4 text-white">Search Classes</h2>
+                <div class="bg-white shadow rounded-lg p-6">
+                    <div class="relative">
+                        <input type="text" id="searchInput"
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Search for a class or instructor..." />
+                        <div id="searchResults" class="mt-4 hidden bg-gray-50 rounded-lg shadow overflow-hidden">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-blue-600 text-white">
+                                        <th class="border-b py-2 px-4 font-bold">Class</th>
+                                        <th class="border-b py-2 px-4 font-bold">Instructor</th>
+                                        <th class="border-b py-2 px-4 font-bold">Time</th>
+                                        <th class="border-b py-2 px-4 font-bold">Location</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="searchResultsBody" class="divide-y"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
         <!-- Overlapping Cards -->
@@ -180,8 +228,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow text-center">
                     <div class="mb-4">
-                        <img src="/images/member1.jpg" alt="Member 1"
-                            class="w-20 h-20 rounded-full mx-auto object-cover">
+                        <img src="/images/1.jpg" alt="Member 1" class="w-20 h-20 rounded-full mx-auto object-cover">
                     </div>
                     <blockquote class="text-gray-700">
                         "The Leisure Center has completely changed my outlook on fitness. I love the variety of
@@ -191,8 +238,7 @@
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow text-center">
                     <div class="mb-4">
-                        <img src="/images/member2.jpg" alt="Member 2"
-                            class="w-20 h-20 rounded-full mx-auto object-cover">
+                        <img src="/images/2.jpg" alt="Member 2" class="w-20 h-20 rounded-full mx-auto object-cover">
                     </div>
                     <blockquote class="text-gray-700">
                         "Top-notch facilities and friendly staff. I feel supported and motivated every time I visit."
@@ -201,8 +247,7 @@
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow text-center">
                     <div class="mb-4">
-                        <img src="/images/member3.jpg" alt="Member 3"
-                            class="w-20 h-20 rounded-full mx-auto object-cover">
+                        <img src="/images/3.jpg" alt="Member 3" class="w-20 h-20 rounded-full mx-auto object-cover">
                     </div>
                     <blockquote class="text-gray-700">
                         "I’ve never felt more at home in a gym environment. This place truly caters to everyone."
@@ -213,54 +258,176 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t">
-        <div
-            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between text-gray-500">
-            <p>&copy; <%= new Date().getFullYear() %> Leisure Center. All rights reserved.</p>
-            <div class="space-x-4 mt-2 md:mt-0">
-            </div>
-        </div>
-    </footer>
 
     <script>
-        window.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loader = document.getElementById('loader');
+            const scheduleLoader = document.getElementById('schedule-loader');
+            const scheduleTable = document.getElementById('schedule-table');
+            const scheduleBody = document.getElementById('schedule-body');
+            const profileSection = document.getElementById('profile-section');
+
+            // Handle booking logic
+            scheduleBody.addEventListener("click", async (event) => {
+                if (event.target.classList.contains("book-btn")) {
+                    const button = event.target;
+                    const classId = button.getAttribute("data-class-id");
+
+                    try {
+                        const response = await fetch("/api/classes/book", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ class_id: classId }),
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            alert(data.message); // Show success message
+                            button.textContent = "Booked"; // Update button text
+                            button.disabled = true; // Disable the button
+                        } else {
+                            const errorData = await response.json();
+                            alert(`Error: ${errorData.error}`);
+                        }
+                    } catch (error) {
+                        console.error("Error booking class:", error);
+                        alert("Failed to book the class. Please try again.");
+                    }
+                }
+            });
+
+            // Load user profile or show login/signup links
             try {
-                await new Promise(res => setTimeout(res, 1500));
+                const response = await fetch('/user/api/');
+                if (!response.ok) throw new Error('Failed to fetch user details');
+                const user = await response.json();
 
+                profileSection.innerHTML = `
+            <div class="flex items-center bg-gray-100 p-3 rounded-lg shadow-md">
+                <img
+                    src="/images/sample-profile.jpg" 
+                    alt="Profile Picture" 
+                    class="w-6 h-6 rounded-full object-cover mr-3"
+                />
+                <div>
+                    <span class="block text-gray-800 font-semibold">
+                        ${user.firstName}
+                    </span>
+                    <span class="block text-gray-500 text-sm">
+                        ${user.email}
+                    </span>
+                </div>
+            </div>
+            <a href="/logout" style="background-color: #6b7280;" class="text-white px-4 py-2 rounded-lg hover:bg-red-600 font-medium">
+                Logout
+            </a>
+        `;
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                profileSection.innerHTML = `
+            <a href="/login" class="text-gray-700 hover:text-blue-600 font-medium">Login</a>
+            <a href="/register" class="text-blue-600 font-medium">Sign Up</a>
+        `;
+            }
+
+            // Load classes and handle booking button logic
+            try {
                 const response = await fetch('/api/classes');
-                const classes = await response.json();
+                if (!response.ok) {
+                    throw new Error('Failed to fetch classes');
+                }
 
-                const scheduleBody = document.getElementById('schedule-body');
+                const { classes, isAuthenticated } = await response.json();
+
+                if (!classes || classes.length === 0) {
+                    scheduleBody.innerHTML = `<tr><td colspan="5" class="text-center text-gray-600 py-4">No classes available at the moment.</td></tr>`;
+                    return;
+                }
 
                 classes.forEach(cls => {
                     const tr = document.createElement('tr');
 
                     const start = new Date(`1970-01-01T${cls.start_time}`);
                     const end = new Date(`1970-01-01T${cls.end_time}`);
-                    const timeString =
-                        `${start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - ${end.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+                    const timeString = `${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+                    const bookButton = cls.isBooked
+                        ? `<button class="bg-gray-400 text-black py-1 px-3 rounded" disabled>You are Booked!</button>`
+                        : isAuthenticated
+                            ? `<button
+         class="bg-blue-600 text-white py-1 px-3 rounded hover:bg-blue-700 book-btn"
+         data-class-id="${cls.class_id}"
+       >Book</button>`
+                            : `<button
+         class="bg-blue-600 text-white py-1 px-3 rounded hover:bg-blue-700"
+         onclick="location.href='/login';"
+       >Login to Book</button>`;
 
                     tr.innerHTML = `
-          <td class="py-4 px-4 text-gray-600">${cls.class_name}</td>
-          <td class="py-4 px-4 text-gray-600">${cls.instructor_name}</td>
-          <td class="py-4 px-4 text-gray-600">${timeString}</td>
-          <td class="py-4 px-4 text-gray-600">${cls.facility_name}</td>
-          <td class="py-4 px-4">
-            <a href="#" class="bg-blue-600 text-white py-1 px-3 rounded hover:bg-blue-700">Book</a>
-          </td>
-        `;
+    <td class="py-4 px-4 text-gray-600">${cls.class_name}</td>
+    <td class="py-4 px-4 text-gray-600">${cls.instructor_name}</td>
+    <td class="py-4 px-4 text-gray-600">${timeString}</td>
+    <td class="py-4 px-4 text-gray-600">${cls.facility_name}</td>
+    <td class="py-4 px-4">${bookButton}</td>
+  `;
+
                     scheduleBody.appendChild(tr);
                 });
-
-                document.getElementById('schedule-loader').style.display = 'none';
-                document.getElementById('schedule-table').classList.remove('hidden');
-
+                loader.style.display = 'none';
+                scheduleLoader.style.display = 'none';
+                scheduleTable.classList.remove('hidden');
             } catch (error) {
                 console.error('Error loading classes:', error);
+                loader.style.display = 'none';
+                scheduleLoader.style.display = 'none';
+                scheduleBody.innerHTML = `<tr><td colspan="5" class="text-center text-red-500 font-bold">Failed to load class schedule. Please try again later.</td></tr>`;
+                scheduleTable.classList.remove('hidden');
             }
+
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', async (e) => {
+                const query = e.target.value.trim();
+                const searchResults = document.getElementById('searchResults');
+                const searchResultsBody = document.getElementById('searchResultsBody');
+
+                if (!query) {
+                    searchResults.classList.add('hidden');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/api/classes/search?query=${query}`);
+                    const results = await response.json();
+
+                    searchResultsBody.innerHTML = '';
+                    results.forEach((cls) => {
+                        const tr = document.createElement('tr');
+
+                        const start = new Date(`1970-01-01T${cls.start_time}`);
+                        const end = new Date(`1970-01-01T${cls.end_time}`);
+                        const timeString = `${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+                        tr.innerHTML = `
+                   <td class="py-2 px-4">${cls.class_name}</td>
+                   <td class="py-2 px-4">${cls.instructor_name}</td>
+                   <td class="py-2 px-4">${timeString}</td>
+                   <td class="py-2 px-4">${cls.facility_name}</td>
+               `;
+                        searchResultsBody.appendChild(tr);
+                    });
+
+                    searchResults.classList.remove('hidden');
+                } catch (err) {
+                    console.error('Search error:', err);
+                }
+            });
         });
+
     </script>
+
+
 
 </body>
 

@@ -77,7 +77,7 @@ class UserController {
     // Clear the token cookie
     console.log('logging out')
     res.clearCookie('token');
-    res.redirect('/');
+    res.redirect('login');
   }
 
   async getUser(req, res) {

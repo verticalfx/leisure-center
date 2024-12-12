@@ -7,7 +7,7 @@ class WorkoutController {
             // Fetch exercises from API
             const response = await axios.get('https://wger.de/api/v2/exercise/', {
                 headers: {
-                    Authorization: 'Token ' + process.env.GYM_API_KEY,
+                    Authorization: 'Token ' + process.env.WORKOUT_API_KEY,
                 },
             });
 
@@ -51,7 +51,7 @@ class WorkoutController {
             // Fetch exercise details from wger API
             const response = await axios.get(`https://wger.de/api/v2/exercise/${id}/`, {
                 headers: {
-                    Authorization: 'Token ' + process.env.GYM_API_KEY,
+                    Authorization: 'Token ' + process.env.WORKOUT_API_KEY,
                 },
             });
 

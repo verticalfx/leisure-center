@@ -48,17 +48,17 @@ Execute the provided database.sql script to set up the database schema
 2. **Configure Database Connection:**
 Create a .env file in the root directory and add the following:
 
-    ```
-WEBSITE_NAME=
-DB_HOST=
-DB_USER=
-DB_PASSWORD=
-DB_NAME=
-JWT_SECRET=
-WORKOUT_API_KEY=
-NUTRITION_API_KEY=
-NUTRITION_APP_ID=
-PORT=
+    ```bash
+    WEBSITE_NAME=
+    DB_HOST=
+    DB_USER=
+    DB_PASSWORD=
+    DB_NAME=
+    JWT_SECRET=
+    WORKOUT_API_KEY=
+    NUTRITION_API_KEY=
+    NUTRITION_APP_ID=
+    PORT=
     ```
 
 ### Running the Application

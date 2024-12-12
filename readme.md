@@ -41,13 +41,13 @@ The **Leisure Center** application is a web-based platform designed to manage an
 ### Database Setup
 
 1. **Create Database and Tables:**
-Execute the provided database.sql script to set up the database schema
+    Execute the provided database.sql script to set up the database schema
 
    ```bash
    mysql -u root -p < database.sql
    ```
 2. **Configure Database Connection:**
-Create a .env file in the root directory and add the following:
+    Create a .env file in the root directory and add the following:
 
     ```bash
     WEBSITE_NAME=
@@ -70,6 +70,4 @@ Create a .env file in the root directory and add the following:
 
    ```
 2. **Access the Application:**
-    ```bash
     Open your browser and navigate to http://localhost:3000
-    ```

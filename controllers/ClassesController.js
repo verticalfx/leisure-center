@@ -8,7 +8,7 @@ module.exports = {
 
       if (!req.isAuthenticated) {
         console.warn('[AUTH] Unauthorized access attempt to renderClassesPage');
-        return res.redirect('/login');
+        return res.redirect('login');
       }
       const classes = await classesModel.getAllClassesWithBookings();
       const facilities = await facilitiesModel.getAllFacilities();

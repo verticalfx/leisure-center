@@ -1,5 +1,6 @@
 # Leisure Center Management Application
 
+uni project assignment
 ## Introduction
 The **Leisure Center** application is a web-based platform designed to manage and participate in various classes and facilities. Built using **Node.js**, **Express.js**, **EJS**, and **SQL**, the application offers features such as user registration, class scheduling, facility management, and real-time updates.
 

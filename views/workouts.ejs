@@ -92,7 +92,7 @@
       // Function to fetch exercises for a specific page
       async function fetchExercises(page) {
         try {
-          const response = await fetch(`/workouts/paginated?page=${page}`);
+          const response = await fetch(`workouts/paginated?page=${page}`);
           if (!response.ok) throw new Error("Failed to fetch exercises");
 
           const data = await response.json();

@@ -274,7 +274,7 @@
                     const classId = button.getAttribute("data-class-id");
 
                     try {
-                        const response = await fetch("/api/classes/book", {
+                        const response = await fetch("api/classes/book", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -300,7 +300,7 @@
 
             // Load user profile or show login/signup links
             try {
-                const response = await fetch('/user/api/');
+                const response = await fetch('user/api/');
                 if (!response.ok) throw new Error('Failed to fetch user details');
                 const user = await response.json();
 
@@ -334,7 +334,7 @@
 
             // Load classes and handle booking button logic
             try {
-                const response = await fetch('/api/classes');
+                const response = await fetch('api/classes');
                 if (!response.ok) {
                     throw new Error('Failed to fetch classes');
                 }
@@ -398,7 +398,7 @@
                 }
 
                 try {
-                    const response = await fetch(`/api/classes/search?query=${query}`);
+                    const response = await fetch(`api/classes/search?query=${query}`);
                     const results = await response.json();
 
                     searchResultsBody.innerHTML = '';
